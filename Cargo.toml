@@ -1,0 +1,37 @@
+[package]
+name = "persona-4-golden-mcp-hack"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+anyhow = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+rmcp = { git = "https://github.com/modelcontextprotocol/rust-sdk", branch = "main", features = [
+    "server",
+    "transport-sse-server",
+    "transport-io",
+] }
+sysinfo = "0.34.2"
+schemars = { version = "0.8", optional = true }
+futures = "0.3"
+rand = { version = "0.9" }
+
+[target.'cfg(windows)'.dependencies]
+winapi = { version = "0.3", features = ["winuser"] }
+
+[dependencies.windows]
+version = "0.61"
+features = [
+    "Win32_System_Threading",
+    "Win32_System_ProcessStatus",
+    "Win32_System_Diagnostics_ToolHelp",
+    "Win32_System_Diagnostics_Debug",
+]
+
+[[example]]
+name = "persona_4_golden_mcp_hack"
+path = "src/main.rs"
