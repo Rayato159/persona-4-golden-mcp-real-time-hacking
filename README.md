@@ -49,6 +49,6 @@ cargo build --release --example persona_4_golden_mcp_hack
 
 3. Chat with Claude and set your money
 
-```json
+```text
 set money in persona 4 golden to 19999
 ```
