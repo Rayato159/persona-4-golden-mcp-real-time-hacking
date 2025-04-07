@@ -1,7 +1,10 @@
 use serde_json::json;
-use windows::Win32::System::{
-    Diagnostics::Debug::{ReadProcessMemory, WriteProcessMemory},
-    Threading::{OpenProcess, PROCESS_VM_OPERATION, PROCESS_VM_READ, PROCESS_VM_WRITE},
+use windows::Win32::{
+    Foundation::CloseHandle,
+    System::{
+        Diagnostics::Debug::{ReadProcessMemory, WriteProcessMemory},
+        Threading::{OpenProcess, PROCESS_VM_OPERATION, PROCESS_VM_READ, PROCESS_VM_WRITE},
+    },
 };
 mod hack;
 
@@ -108,6 +111,9 @@ impl PersonaMoney {
                     "❌ Failed to write memory".to_string(),
                 )]));
             }
+
+            CloseHandle(handle).unwrap();
+            tracing::debug!("Successfully to close handle");
 
             Ok(CallToolResult::success(vec![Content::text(format!(
                 "✅ Successfully set money to {}",
